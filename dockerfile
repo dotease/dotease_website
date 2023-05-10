@@ -1,5 +1,19 @@
 FROM node:lts-alpine as base
 
+WORKDIR /app
+
+ARG database_url
+ARG next_auth_secret
+ARG next_auth_url
+ARG discord_client_id
+ARG discord_client_secret
+
+ENV DATABASE_URL $database_url
+ENV NEXTAUTH_SECRET $next_auth_secret
+ENV NEXTAUTH_URL $next_auth_url
+ENV DISCORD_CLIENT_ID $discord_client_id
+ENV DISCORD_CLIENT_SECRET $discord_client_id
+
 RUN npm install -g pnpm
 
 FROM base as dependencies
@@ -14,6 +28,7 @@ FROM base as build
 WORKDIR /app
 COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
+
 RUN pnpm prisma generate
 RUN pnpm build
 
