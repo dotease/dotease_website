@@ -18,6 +18,7 @@ jobs:
         id: cache-prisma
         uses: actions/cache@v3
         with:
+          path: ./
           key: ${{ hashFiles('prisma/schema.prisma') }}-prisma
 
       - name: Generate Prisma
@@ -40,6 +41,7 @@ jobs:
       - name: Restore Prisma
         uses: actions/cache/restore@v3
         with:
+          path: ./
           key: ${{ hashFiles('prisma/schema.prisma') }}-prisma
 
       - name: verify code
@@ -65,6 +67,7 @@ jobs:
       - name: Restore Prisma
         uses: actions/cache/restore@v3
         with:
+          path: ./
           key: ${{ hashFiles('prisma/schema.prisma') }}-prisma
 
       - name: build app
