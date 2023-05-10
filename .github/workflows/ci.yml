@@ -5,6 +5,10 @@ on:
       - main
   pull_request:
 
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   setup:
     name: Setup dependencies
@@ -17,7 +21,7 @@ jobs:
           key: ${{ hashFiles('prisma/schema.prisma') }}-prisma
 
       - name: Generate Prisma
-        if: cache-prisma.outputs.cache-hit != 'true'
+        if: steps.cache-prisma.outputs.cache-hit != 'true'
         run: pnpm run postinstall
 
   validate-code:
