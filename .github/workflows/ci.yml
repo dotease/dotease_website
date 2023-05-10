@@ -23,7 +23,7 @@ jobs:
 
       - name: Generate Prisma
         if: steps.cache-prisma.outputs.cache-hit != 'true'
-        run: pnpm run postinstall
+        run: prisma generate
 
   validate-code:
     needs: setup
