@@ -14,6 +14,10 @@ jobs:
     name: Setup dependencies
     runs-on: Ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
       - run: npm install -g pnpm @antfu/ni
 
       - name: Setup Node
@@ -38,6 +42,10 @@ jobs:
     name: Validate Code
     runs-on: Ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
       - run: npm install -g pnpm @antfu/ni
 
       - name: Setup Node
@@ -64,6 +72,10 @@ jobs:
     name: Build test
     runs-on: Ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
       - run: npm install -g pnpm @antfu/ni
 
       - name: Setup Node
