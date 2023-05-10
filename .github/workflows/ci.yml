@@ -25,6 +25,7 @@ jobs:
         run: pnpm run postinstall
 
   validate-code:
+    needs: setup
     name: Validate Code
     runs-on: Ubuntu-latest
     steps:
@@ -49,6 +50,7 @@ jobs:
   #  runs-on: Ubuntu-latest
 
   build:
+    needs: validate-code
     name: Build test
     runs-on: Ubuntu-latest
     steps:
