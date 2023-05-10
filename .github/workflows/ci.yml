@@ -1,0 +1,69 @@
+name: Continuous Integration Test
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  setup:
+    name: Setup dependencies
+    runs-on: Ubuntu-latest
+    steps:
+      - name: Cache Prisma
+        id: cache-prisma
+        uses: actions/cache@v3
+        with:
+          key: ${{ hashFiles('prisma/schema.prisma') }}-prisma
+
+      - name: Generate Prisma
+        if: cache-prisma.outputs.cache-hit != 'true'
+        run: pnpm run postinstall
+
+  validate-code:
+    name: Validate Code
+    runs-on: Ubuntu-latest
+    steps:
+      - run: npm install -g pnpm @antfu/ni
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+
+      - name: Restore Prisma
+        uses: actions/cache/restore@v3
+        with:
+          key: ${{ hashFiles('prisma/schema.prisma') }}-prisma
+
+      - name: verify code
+        run: pnpm run lint
+
+  #unit-tests:
+  #  name: Unit tests
+  #  runs-on: Ubuntu-latest
+
+  build:
+    name: Build test
+    runs-on: Ubuntu-latest
+    steps:
+      - run: npm install -g pnpm @antfu/ni
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+
+      - name: Restore Prisma
+        uses: actions/cache/restore@v3
+        with:
+          key: ${{ hashFiles('prisma/schema.prisma') }}-prisma
+
+      - name: build app
+        run: pnpm run build
+
+  #push-docker-image:
+  #  name: Push new docker image on DockerHub
+  #  runs-on: Ubuntu-latest
