@@ -26,6 +26,9 @@ jobs:
           node-version: '18'
           cache: 'pnpm'
 
+      - name: Install node modules
+        run: pnpm i
+
       - name: Cache Prisma
         id: cache-prisma
         uses: actions/cache@v3
@@ -53,6 +56,9 @@ jobs:
         with:
           node-version: '18'
           cache: 'pnpm'
+
+      - name: Install node modules
+        run: pnpm i
 
       - name: Restore Prisma
         uses: actions/cache/restore@v3
