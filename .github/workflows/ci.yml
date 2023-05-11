@@ -5,6 +5,14 @@ on:
       - main
   pull_request:
 
+env:
+  DATABASE_URL: 127.0.0.1:5000
+  NEXTAUTH_URL: http://localhost:3000
+  NEXTAUTH_SECRET: some_auth_secret
+  DISCORD_CLIENT_ID: my_discord_client
+  DISCORD_CLIENT_SECRET: my_discord_secret
+
+
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -66,6 +74,7 @@ jobs:
   #unit-tests:
   #  name: Unit tests
   #  runs-on: Ubuntu-latest
+
   build:
     needs: validate-code
     name: Build test
