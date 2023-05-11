@@ -6,7 +6,7 @@ on:
   pull_request:
 
 env:
-  DATABASE_URL: 127.0.0.1:5000
+  DATABASE_URL: file:./db.sqlite
   NEXTAUTH_URL: http://localhost:3000
   NEXTAUTH_SECRET: some_auth_secret
   DISCORD_CLIENT_ID: my_discord_client
