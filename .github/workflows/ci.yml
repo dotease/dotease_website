@@ -46,6 +46,9 @@ jobs:
           node-version: '18'
           cache: 'pnpm'
 
+      - name: Install Dependencies
+        run: pnpm i
+
       - name: verify code
         run: pnpm run lint
         env:
@@ -72,6 +75,9 @@ jobs:
           node-version: '18'
           cache: 'pnpm'
 
+      - name: Install Dependencies
+        run: pnpm i
+
       - name: Run unit tests
         run: pnpm run test
 
@@ -91,6 +97,9 @@ jobs:
         with:
           node-version: '18'
           cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: pnpm i
 
       - name: build app
         run: pnpm run build
