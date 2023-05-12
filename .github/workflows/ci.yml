@@ -126,7 +126,7 @@ jobs:
         run: pnpm run build
 
   push-docker-image:
-    needs: build
+    needs: build, unit-tests
     name: Push image on DockerHub
     runs-on: Ubuntu-latest
     steps:
