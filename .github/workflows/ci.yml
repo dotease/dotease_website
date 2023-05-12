@@ -157,10 +157,9 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          build-args: [
-            database_url=${{ env.DATABASE_URL }},
-            next_auth_url=${{ NEXTAUTH_URL }},
-            next_auth_secret=${{ env.NEXTAUTH_SECRET }},
-            discord_client_id=${{ env.DISCORD_CLIENT_ID }},
-            discord_client_secret=${{ env.DISCORD_CLIENT_SECRET }}
-          ]
+          build-args: |
+            database_url = ${{ env.DATABASE_URL }}
+            next_auth_url = ${{ NEXTAUTH_URL }}
+            next_auth_secret = ${{ env.NEXTAUTH_SECRET }}
+            discord_client_id = ${{ env.DISCORD_CLIENT_ID }}
+            discord_client_secret = ${{ env.DISCORD_CLIENT_SECRET }}
