@@ -5,6 +5,13 @@ on:
       - main
   pull_request:
 
+env:
+  DATABASE_URL: ${{ env.DATABASE_URL }}
+  NEXTAUTH_URL: ${{ env.NEXTAUTH_URL }}
+  NEXTAUTH_SECRET: ${{ env.NEXTAUTH_SECRET }}
+  DISCORD_CLIENT_ID: ${{ env.DISCORD_CLIENT_ID }}
+  DISCORD_CLIENT_SECRET: ${{ env.DISCORD_CLIENT_SECRET }}
+
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -117,13 +124,6 @@ jobs:
 
       - name: build app
         run: pnpm run build
-        env: [
-          ${{ env.DATABASE_URL }},
-          ${{ env.NEXTAUTH_URL }},
-          ${{ env.NEXTAUTH_SECRET }}
-          ${{ env.DISCORD_CLIENT_ID }},
-          ${{ env.DISCORD_CLIENT_SECRET }}
-        ]
 
   push-docker-image:
     needs: build
