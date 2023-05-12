@@ -10,25 +10,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  setup:
-    name: Setup dependencies
-    runs-on: Ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - run: npm install -g pnpm @antfu/ni
-
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          cache: 'pnpm'
-
-      - name: Install Dependencies
-        run: pnpm i
-
   validate-code:
     needs: setup
     name: Validate Code
