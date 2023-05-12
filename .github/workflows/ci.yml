@@ -74,7 +74,7 @@ jobs:
         run: pnpm run lint
 
   unit-tests:
-    needs: validate-code
+    needs: setup
     name: Unit tests
     runs-on: Ubuntu-latest
     steps:
@@ -100,7 +100,7 @@ jobs:
         run: pnpm run test
 
   build:
-    needs: validate-code
+    needs: [validate-code, unit-tests]
     name: Build test
     runs-on: Ubuntu-latest
     steps:
@@ -126,7 +126,7 @@ jobs:
         run: pnpm run build
 
   push-docker-image:
-    needs: [build, unit-tests]
+    needs: build
     name: Push image on DockerHub
     runs-on: Ubuntu-latest
     steps:
