@@ -5,13 +5,6 @@ on:
       - main
   pull_request:
 
-env:
-  DATABASE_URL: file:./db.sqlite
-  NEXTAUTH_URL: http://localhost:3000
-  NEXTAUTH_SECRET: some_auth_secret
-  DISCORD_CLIENT_ID: my_discord_client
-  DISCORD_CLIENT_SECRET: my_discord_secret
-
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -124,6 +117,13 @@ jobs:
 
       - name: build app
         run: pnpm run build
+        env: [
+          ${{ env.DATABASE_URL }},
+          ${{ env.NEXTAUTH_URL }},
+          ${{ env.NEXTAUTH_SECRET }}
+          ${{ env.DISCORD_CLIENT_ID }},
+          ${{ env.DISCORD_CLIENT_SECRET }}
+        ]
 
   push-docker-image:
     needs: build
@@ -157,3 +157,10 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: [
+            database_url=${{ env.DATABASE_URL }},
+            next_auth_url=${{ NEXTAUTH_URL }},
+            next_auth_secret=${{ env.NEXTAUTH_SECRET }},
+            discord_client_id=${{ env.DISCORD_CLIENT_ID }},
+            discord_client_secret=${{ env.DISCORD_CLIENT_SECRET }}
+          ]
