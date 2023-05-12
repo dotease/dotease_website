@@ -163,8 +163,8 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            database_url = ${{ secrets.DATABASE_URL }}
-            next_auth_url = ${{ secrets.NEXTAUTH_URL }}
-            next_auth_secret = ${{ secrets.NEXTAUTH_SECRET }}
-            discord_client_id = ${{ secrets.DISCORD_CLIENT_ID }}
-            discord_client_secret = ${{ secrets.DISCORD_CLIENT_SECRET }}
+            "database_url=${{ secrets.DATABASE_URL }}"
+            "next_auth_url=${{ secrets.NEXTAUTH_URL }}"
+            "next_auth_secret=${{ secrets.NEXTAUTH_SECRET }}"
+            "discord_client_id=${{ secrets.DISCORD_CLIENT_ID }}"
+            "discord_client_secret=${{ secrets.DISCORD_CLIENT_SECRET }}"
