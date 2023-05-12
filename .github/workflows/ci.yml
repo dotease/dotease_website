@@ -29,17 +29,6 @@ jobs:
       - name: Install Dependencies
         run: pnpm i
 
-      - name: Cache Prisma
-        id: cache-prisma
-        uses: actions/cache@v3
-        with:
-          path: ./
-          key: ${{ hashFiles('prisma/schema.prisma') }}-prisma
-
-      - name: Generate Prisma
-        if: steps.cache-prisma.outputs.cache-hit != 'true'
-        run: pnpm prisma generate
-
   validate-code:
     needs: setup
     name: Validate Code
@@ -56,12 +45,6 @@ jobs:
         with:
           node-version: '18'
           cache: 'pnpm'
-
-      - name: Restore Prisma
-        uses: actions/cache/restore@v3
-        with:
-          path: ./
-          key: ${{ hashFiles('prisma/schema.prisma') }}-prisma
 
       - name: verify code
         run: pnpm run lint
@@ -89,12 +72,6 @@ jobs:
           node-version: '18'
           cache: 'pnpm'
 
-      - name: Restore Prisma
-        uses: actions/cache/restore@v3
-        with:
-          path: ./
-          key: ${{ hashFiles('prisma/schema.prisma') }}-prisma
-
       - name: Run unit tests
         run: pnpm run test
 
@@ -114,12 +91,6 @@ jobs:
         with:
           node-version: '18'
           cache: 'pnpm'
-
-      - name: Restore Prisma
-        uses: actions/cache/restore@v3
-        with:
-          path: ./
-          key: ${{ hashFiles('prisma/schema.prisma') }}-prisma
 
       - name: build app
         run: pnpm run build
