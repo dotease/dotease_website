@@ -1,5 +1,6 @@
 import { createTRPCRouter } from "dotenv/server/api/trpc";
 import { exampleRouter } from "dotenv/server/api/routers/example";
+import {authRouter} from "dotenv/server/api/routers/auth";
 
 /**
  * This is the primary router for your server.
@@ -8,6 +9,7 @@ import { exampleRouter } from "dotenv/server/api/routers/example";
  */
 export const appRouter = createTRPCRouter({
   example: exampleRouter,
+  auth: authRouter,
 });
 
 // export type definition of API

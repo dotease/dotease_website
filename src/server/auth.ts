@@ -6,8 +6,10 @@ import {
 } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { env } from "dotenv/env.mjs";
+import bcrypt from "bcrypt";
 import { prisma } from "dotenv/server/db";
+import {z} from "zod";
+import {User} from ".prisma/client";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -30,20 +32,36 @@ declare module "next-auth" {
   // }
 }
 
+const loginSchema = z.object({
+  email: z.string().email({ message: "Ce champ doit être un email" }),
+  password: z.string().min(6),
+});
+
 /**
  * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
  *
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
+  session: {
+    strategy: "jwt",
+  },
+  jwt: {
+    maxAge: 15 * 24 * 30 * 60, // 15 days
+  },
+  pages: {
+    signIn: "/login",
+    newUser: "/register",
+  },
   callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
+    jwt({ token, user, account }) {
+      if (account && user) {
+        token.email = user.email;
+        token.sub = user.id;
+      }
+
+      return token;
+    }
   },
   adapter: PrismaAdapter(prisma),
   providers: [
