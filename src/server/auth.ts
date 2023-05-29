@@ -4,7 +4,7 @@ import {
   type NextAuthOptions,
   type DefaultSession,
 } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
+import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { env } from "dotenv/env.mjs";
 import { prisma } from "dotenv/server/db";
@@ -47,10 +47,32 @@ export const authOptions: NextAuthOptions = {
   },
   adapter: PrismaAdapter(prisma),
   providers: [
-    DiscordProvider({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
+    CredentialsProvider({
+      name: "DotEaseAuth",
+      credentials: {
+        email: { label: "Email", placeholder: "example@email.fr", type: "email" },
+        password: { label: "Password", placeholder: "******", type: "password"},
+      },
+      async authorize(credentials) {
+        const creds = await loginSchema.parseAsync(credentials);
+        const user: User | null = await prisma.user.findUnique({ where : { email: creds.email }});
+
+        if (!user)
+          return null;
+
+        const validPassword = await bcrypt.compare(creds.password, user.password);
+
+        if (!validPassword)
+          return null;
+
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email
+        }
+      },
     }),
+
     /**
      * ...add more providers here.
      *

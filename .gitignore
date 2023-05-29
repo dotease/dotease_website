@@ -45,3 +45,5 @@ yarn-error.log*
 /.idea/vcs.xml
 /.idea/.gitignore
 /.idea/modules.xml
+
+.idea
