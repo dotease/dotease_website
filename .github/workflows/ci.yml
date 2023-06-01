@@ -29,9 +29,6 @@ jobs:
       - name: Install Dependencies
         run: pnpm i
 
-      - name: Prisma generate
-        run: npx prisma generate
-
       - name: verify code
         run: pnpm run lint
         env:
