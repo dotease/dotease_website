@@ -1,4 +1,4 @@
-import {createTRPCRouter, protectedProcedure, publicProcedure} from "dotenv/server/api/trpc";
+import {createTRPCRouter, publicProcedure} from "dotenv/server/api/trpc";
 import {registerSchema} from "dotenv/components/RegisterForm";
 import {TRPCError} from "@trpc/server";
 import bcrypt from "bcrypt";

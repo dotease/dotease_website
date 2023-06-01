@@ -9,7 +9,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import bcrypt from "bcrypt";
 import { prisma } from "dotenv/server/db";
 import {z} from "zod";
-import {User} from ".prisma/client";
+import {type User} from ".prisma/client";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -72,7 +72,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", placeholder: "******", type: "password"},
       },
       async authorize(credentials) {
-        const creds = await loginSchema.parseAsync(credentials);
+        const creds: { email: string, password: string } = await loginSchema.parseAsync(credentials);
         const user: User | null = await prisma.user.findUnique({ where : { email: creds.email }});
 
         if (!user)
