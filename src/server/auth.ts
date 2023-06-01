@@ -74,7 +74,7 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials):  Promise<null | {name: string | null, id: string, email: string | null}> {
         const creds: { email: string, password: string } = await loginSchema.parseAsync(credentials);
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        const user: User | null = await prisma.user.findUnique({ where : { email: creds.email }}) as User | null;
+        const user: User | null = await prisma.user.findUnique({ where : { email: creds.email }});
 
         if (!user)
           return null;
