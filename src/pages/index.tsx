@@ -1,15 +1,10 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
-import Link from "next/link";
 
 const Home: NextPage = () => {
   const { data } = useSession();
-
-  async function logOut() {
-    await signOut({ redirect: true, callbackUrl: "/auth/login" });
-  }
 
   return (
     <>
@@ -21,16 +16,12 @@ const Home: NextPage = () => {
       <main className="flex min-h-screen flex-col items-center justify-center">
         <h1 className="text-6xl font-bold">
           Welcome to <b>.ease</b>
-          {data ? (
+          {data && (
             <p>
               {data.user.surname} {data.user.name}{" "}
             </p>
-          ) : (
-            <Link href={"/auth/login"}>Se connecter</Link>
           )}
         </h1>
-        {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-        <button onClick={logOut}>Sign out</button>
       </main>
     </>
   );

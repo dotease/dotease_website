@@ -3,7 +3,7 @@ import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 
 import { api } from "dotenv/utils/api";
-import Header from "dotenv/components/header"
+import Header from "dotenv/components/Header"
 
 import "dotenv/styles/globals.css";
 
