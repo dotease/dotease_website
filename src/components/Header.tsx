@@ -10,11 +10,42 @@ export default function Header() {
     const [isWrappedAbout, setIsWrappedAbout] = useState<boolean>(true);
     const { data } = useSession();
 
-    const logOut = () => {
+    function logOut () {
         signOut({callbackUrl:'/', redirect:true})
             .catch(e => {
                 console.log(e)
             });
+    }
+
+    function toggleWrapAbout(){
+        setIsWrappedAbout(!isWrappedAbout);
+    }
+
+    function handleLogin() {
+        if (!data) {
+            return (
+                <div className="flex justify-center gap-20 sm:gap-3">
+                    <Link href={"/auth/login"}>
+                        <LinkButton name={"Login"} text_color={"text-white"} bg_color={"bg-teal-600"}/>
+                    </Link>
+                    <Link href={"/auth/register"}>
+                        <LinkButton name={"Register"}  text_color={"text-teal-600"} bg_color={"bg-gray-100"}/>
+                    </Link>
+                </div>
+            )
+        }
+        else {
+            return (
+                <div className="sm:flex sm:gap-4">
+                    <button
+                        className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
+                        onClick={logOut}
+                    >
+                        Logout
+                    </button>
+                </div>
+            )
+        }
     }
 
     const linkList: {link: string, name: string}[] = [
@@ -49,39 +80,6 @@ export default function Header() {
             isButton: true
         }
     ]
-
-    const toggleWrapAbout = ()=> {
-        setIsWrappedAbout(!isWrappedAbout);
-    }
-
-
-
-    const handleLogin = () => {
-        if (!data) {
-            return (
-                <div className="flex justify-center gap-20 sm:gap-3">
-                    <Link href={"/auth/login"}>
-                        <LinkButton name={"Login"} text_color={"text-white"} bg_color={"bg-teal-600"}/>
-                    </Link>
-                    <Link href={"/auth/register"}>
-                        <LinkButton name={"Register"}  text_color={"text-teal-600"} bg_color={"bg-gray-100"}/>
-                    </Link>
-                </div>
-            )
-        }
-        else {
-            return (
-                <div className="sm:flex sm:gap-4">
-                    <button
-                        className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
-                        onClick={logOut}
-                    >
-                        Logout
-                    </button>
-                </div>
-            )
-        }
-    }
 
     return (
         <header aria-label="Site Header" className="bg-white">
