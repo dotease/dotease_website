@@ -49,13 +49,20 @@ model Session {
 
 model User {
   id            String    @id @default(cuid())
-  name          String?
+  name          String
+  surname       String
   email         String?   @unique
   emailVerified DateTime?
   password      String
   image         String?
-  accounts      Account[]
-  sessions      Session[]
+
+  accounts Account[]
+  sessions Session[]
+}
+
+model Class {
+  id   String @id @default(cuid())
+  name String
 }
 
 model VerificationToken {

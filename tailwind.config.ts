@@ -7,8 +7,8 @@ export default {
       container: {
         center: true,
         padding: "4rem",
-      }
+      },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 } satisfies Config;
