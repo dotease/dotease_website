@@ -5,6 +5,7 @@ import { api } from "dotenv/utils/api";
 import Input from "dotenv/components/formInputs/Input";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import GitHubConnectButton from "dotenv/components/GitHubConnextButton";
 
 export const registerSchema = z
   .object({
@@ -88,6 +89,8 @@ export default function RegisterForm() {
           <button className="inline-block shrink-0 rounded-md border border-primary-700 bg-primary-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-primary-800 focus:outline-none focus:ring active:text-blue-500">
             Create an account
           </button>
+
+          <GitHubConnectButton />
 
           <p className="mt-4 text-sm text-gray-500 sm:mt-0">
             Already have an account?

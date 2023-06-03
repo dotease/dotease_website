@@ -6,6 +6,7 @@ import Link from "next/link";
 import Input from "dotenv/components/formInputs/Input";
 import { useState } from "react";
 import { redirect } from "next/navigation";
+import GitHubConnectButton from "dotenv/components/GitHubConnextButton";
 
 export const loginSchema = z.object({
   email: z.string().email({ message: "Il faut mettre un email " }),
@@ -53,7 +54,9 @@ export default function LoginForm() {
               </Link>
             </p>
 
-            <button type="submit" className="inline-block rounded-lg bg-primary-600 px-5 py-3 text-sm font-medium text-white">
+            <GitHubConnectButton />
+
+            <button type="submit" className="ml-2 inline-block rounded-lg bg-primary-600 px-5 py-3 text-sm font-medium text-white">
               Sign in
             </button>
 
