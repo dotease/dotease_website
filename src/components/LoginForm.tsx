@@ -53,7 +53,7 @@ export default function LoginForm() {
               </Link>
             </p>
 
-            <button type="submit" className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white">
+            <button type="submit" className="inline-block rounded-lg bg-primary-600 px-5 py-3 text-sm font-medium text-white">
               Sign in
             </button>
 
