@@ -10,6 +10,7 @@ export default function LoginPage() {
           <div className="hidden lg:relative lg:block lg:p-12">
             <Link className="block text-white" href="/">
               <span className="sr-only">Home</span>
+              <img className={"h-10 sm:h-12"} src="/dotease_logo_smol.svg" alt="logo dotease" />
             </Link>
 
             <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">Welcome to .ease ✨</h2>
