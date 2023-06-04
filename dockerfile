@@ -5,14 +5,14 @@ WORKDIR /app
 ARG database_url
 ARG next_auth_secret
 ARG next_auth_url
-ARG discord_client_id
-ARG discord_client_secret
+ARG git_id
+ARG git_secret
 
 ENV DATABASE_URL $database_url
 ENV NEXTAUTH_SECRET $next_auth_secret
 ENV NEXTAUTH_URL $next_auth_url
-ENV DISCORD_CLIENT_ID $discord_client_id
-ENV DISCORD_CLIENT_SECRET $discord_client_id
+ENV GIT_ID $git_id
+ENV GIT_SECRET $git_secret
 
 RUN npm install -g pnpm
 
