@@ -10,8 +10,9 @@ import GitHubConnectButton from "dotenv/components/GitHubConnextButton";
 export const registerSchema = z
   .object({
     email: z.string().email({ message: "You must put an email" }),
-    surname: z.string().min(2, { message: "The surname must have more than 2 characters" }),
-    name: z.string().min(2, { message: "The name must have more that 2 characters" }),
+    last_name: z.string().min(2, { message: "The last name must have more than 2 characters" }).optional(),
+    first_name: z.string().min(2, { message: "The first name must have more than 2 characters" }).optional(),
+    username: z.string().min(2, { message: "The name must have more that 2 characters" }),
     password: z.string().min(6, { message: "The password must have at least 6 characters" }),
     rePassword: z.string().min(6, { message: "The password confirmation must have at least 6 characters" }),
   })
@@ -63,6 +64,10 @@ export default function RegisterForm() {
           <Input label={"Email"} name={"email"} type={"email"} />
         </div>
 
+        <div className="col-span-6">
+          <Input label={"Username"} name={"username"} type={"text"} />
+        </div>
+
         <div className="col-span-6 sm:col-span-3">
           <Input label={"Password"} name={"password"} type={"password"} />
         </div>
@@ -74,11 +79,11 @@ export default function RegisterForm() {
         <div className="mt-4 col-span-6">
           <p className="text-sm text-gray-500">
             By creating an account, you agree to our
-            <Link href="/terms" className="mx-2 text-gray-700 underline">
+            <Link href="/" className="mx-2 text-gray-700 underline">
               terms and conditions
             </Link>
             and
-            <Link href="/policy" className="ml-2 text-gray-700 underline">
+            <Link href="/" className="ml-2 text-gray-700 underline">
               privacy policy
             </Link>
             .

@@ -16,8 +16,9 @@ export const authRouter = createTRPCRouter({
     const createdUser = await prisma.user.create({
       data: {
         email: registerUser.email,
-        name: registerUser.name,
-        surname: registerUser.surname,
+        name: registerUser.username,
+        last_name: registerUser.last_name,
+        first_name: registerUser.first_name,
         password: registerUser.password,
       },
     });
