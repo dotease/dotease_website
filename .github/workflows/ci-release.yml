@@ -1,0 +1,124 @@
+name: Continuous Integration Test
+on:
+  release:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate-code:
+    name: Validate Code
+    runs-on: Ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - run: npm install -g pnpm @antfu/ni
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: pnpm i
+
+      - name: verify code
+        run: pnpm run lint
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          GIT_ID: ${{ secrets.GIT_ID }}
+          GIT_SECRET: ${{ secrets.GIT_SECRET }}
+
+  unit-tests:
+    name: Unit tests
+    runs-on: Ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-dep: 0
+
+      - run: npm install -g pnpm @antfu/ni
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: pnpm i
+
+      - name: Run unit tests
+        run: pnpm run test
+
+  build:
+    needs: [validate-code, unit-tests]
+    name: Build test
+    runs-on: Ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - run: npm install -g pnpm @antfu/ni
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: pnpm i
+
+      - name: build app
+        run: pnpm run build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          GIT_ID: ${{ secrets.GIT_ID }}
+          GIT_SECRET: ${{ secrets.GIT_SECRET }}
+
+  push-docker-image:
+    needs: build
+    name: Push image on DockerHub
+    runs-on: Ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Log in to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USER }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+      - name: Create image meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: dotease/dotease_website
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            "database_url=${{ secrets.DATABASE_URL }}"
+            "next_auth_url=${{ secrets.NEXTAUTH_URL }}"
+            "next_auth_secret=${{ secrets.NEXTAUTH_SECRET }}"
+            "git_id=${{ secrets.GIT_ID }}"
+            "git_secret=${{ secrets.GIT_SECRET }}"
