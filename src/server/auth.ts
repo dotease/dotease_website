@@ -1,11 +1,14 @@
 import { type GetServerSidePropsContext } from "next";
 import { getServerSession, type NextAuthOptions, type DefaultSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GitHubProvider from "next-auth/providers/github";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import bcrypt from "bcrypt";
 import { prisma } from "dotenv/server/db";
 import { type User } from "@prisma/client";
 import { loginSchema } from "dotenv/components/LoginForm";
+import { env } from "dotenv/env.mjs";
+import {TRPCClientError} from "@trpc/client";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -56,6 +59,10 @@ export const authOptions: NextAuthOptions = {
   },
   adapter: PrismaAdapter(prisma),
   providers: [
+    GitHubProvider({
+      clientId: env.GIT_ID,
+      clientSecret: env.GIT_SECRET,
+    }),
     CredentialsProvider({
       name: "DotEaseAuth",
       credentials: {
@@ -67,6 +74,7 @@ export const authOptions: NextAuthOptions = {
         const user: User | null = await prisma.user.findUnique({ where: { email: creds.email } });
 
         if (!user) return null;
+        if (!user.password) throw TRPCClientError;
 
         const validPassword = await bcrypt.compare(creds.password, user.password);
 
@@ -75,7 +83,7 @@ export const authOptions: NextAuthOptions = {
         return {
           id: user.id,
           name: user.name,
-          surname: user.surname,
+          last_name: user.last_name,
           email: user.email,
         };
       },

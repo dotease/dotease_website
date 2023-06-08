@@ -1,0 +1,34 @@
+{
+  "pages": {
+    "common": {
+      "connect_description": "Pour rejoindre une grande communauté d'entraide et de partage"
+    },
+    "home": {
+      "welcome": "Bienvenue sur .ease ✨"
+    },
+    "login": {
+      "join_dotease": "Rejoignez DotEase"
+    },
+    "register": {
+
+    }
+  },
+  "forms": {
+    "inputs": {
+      "labels": {
+        "last_name": "Nom",
+        "first_name": "Prénom",
+        "email": "Email",
+        "password": "Mot de passe",
+        "password_confirmation": "Confirmation du mot de passe",
+        "username": "Nom d'utilisateur",
+        "no_account": "Pas de compte ?"
+      }
+    },
+    "buttons": {
+      "register": "S'inscrire",
+      "login": "Se connecter",
+      "github": "Se connecter avec Github"
+    }
+  }
+}
