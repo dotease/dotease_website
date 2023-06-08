@@ -1,7 +1,7 @@
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-
+import { Atkinson_Hyperlegible } from 'next/font/google'
 import { api } from "dotenv/utils/api";
 
 import "dotenv/styles/globals.css";
@@ -23,6 +23,11 @@ const messages = {
   //
   // }
 };
+
+const atkinson_Hyperlegible = Atkinson_Hyperlegible({
+  weight: ["400", "700"],
+  subsets:['latin']
+})
 
 const MyApp: AppType<{ session: Session | null }> = ({ Component, pageProps: { session, ...pageProps } }) => {
   const [currentLanguage] = useAtom(languageAtom);
