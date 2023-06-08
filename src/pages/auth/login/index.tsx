@@ -1,5 +1,6 @@
 import LoginForm from "dotenv/components/LoginForm";
 import Link from "next/link";
+import { FormattedMessage } from "react-intl";
 
 export default function LoginPage() {
   return (
@@ -13,10 +14,12 @@ export default function LoginPage() {
               <img className={"h-10 sm:h-12"} src="/dotease_logo_smol.svg" alt="logo dotease" />
             </Link>
 
-            <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">Welcome to .ease ✨</h2>
+            <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
+              <FormattedMessage id={"pages.home.welcome"} />
+            </h2>
 
             <p className="mt-4 leading-relaxed text-white/90">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam, quibusdam aperiam voluptatum.
+              <FormattedMessage id={"pages.common.connect_description"} />
             </p>
           </div>
         </section>
@@ -32,7 +35,7 @@ export default function LoginPage() {
               <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">Welcome to .ease ✨</h1>
 
               <p className="mt-4 leading-relaxed text-gray-500">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam, quibusdam aperiam voluptatum.
+                <FormattedMessage id={"pages.common.connect_description"} />
               </p>
             </div>
             <div className={"lg:w-[40vw] md:w-[60vw] sm:w-[80vw]"}>
