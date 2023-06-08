@@ -5,14 +5,16 @@ import { api } from "dotenv/utils/api";
 import Input from "dotenv/components/formInputs/Input";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import GitHubConnectButton from "dotenv/components/GitHubConnextButton";
 import frMessages from "dotenv/translations/fr.json";
 import { flattenKeys } from "dotenv/translations/translator";
 
 export const registerSchema = z
   .object({
     email: z.string().email({ message: "You must put an email" }),
-    surname: z.string().min(2, { message: "The surname must have more than 2 characters" }),
-    name: z.string().min(2, { message: "The name must have more that 2 characters" }),
+    last_name: z.string().min(2, { message: "The last name must have more than 2 characters" }).optional(),
+    first_name: z.string().min(2, { message: "The first name must have more than 2 characters" }).optional(),
+    username: z.string().min(2, { message: "The name must have more that 2 characters" }),
     password: z.string().min(6, { message: "The password must have at least 6 characters" }),
     rePassword: z.string().min(6, { message: "The password confirmation must have at least 6 characters" }),
   })
@@ -66,6 +68,10 @@ export default function RegisterForm() {
           <Input label={"email"} name={"email"} type={"email"} />
         </div>
 
+        <div className="col-span-6">
+          <Input label={"Username"} name={"username"} type={"text"} />
+        </div>
+
         <div className="col-span-6 sm:col-span-3">
           <Input label={"password"} name={"password"} type={"password"} />
         </div>
@@ -92,6 +98,8 @@ export default function RegisterForm() {
           <button className="inline-block shrink-0 rounded-md border border-primary-700 bg-primary-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-primary-800 focus:outline-none focus:ring active:text-blue-500">
             Create an account
           </button>
+
+          <GitHubConnectButton />
 
           <p className="mt-4 text-sm text-gray-500 sm:mt-0">
             Already have an account?

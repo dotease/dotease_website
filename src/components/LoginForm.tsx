@@ -6,6 +6,7 @@ import Link from "next/link";
 import Input from "dotenv/components/formInputs/Input";
 import { useState } from "react";
 import { redirect } from "next/navigation";
+import GitHubConnectButton from "dotenv/components/GitHubConnextButton";
 import { FormattedMessage } from "react-intl";
 
 export const loginSchema = z.object({
@@ -54,6 +55,7 @@ export default function LoginForm() {
               </Link>
             </p>
 
+            <GitHubConnectButton />
             <button type="submit" className="inline-block rounded-lg bg-primary-600 px-5 py-3 text-sm font-medium text-white">
               <FormattedMessage id={"forms.buttons.login"} />
             </button>
