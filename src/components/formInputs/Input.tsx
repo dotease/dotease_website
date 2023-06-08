@@ -1,5 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import { type ReactNode } from "react";
+import { FormattedMessage } from "react-intl";
 
 interface InputProps {
   label: string;
@@ -17,7 +18,7 @@ function Input({ label, name, type, placeholder }: InputProps) {
   return (
     <>
       <label htmlFor={name} className="block text-xs font-medium text-gray-700">
-        {label}
+        <FormattedMessage id={`forms.inputs.labels.${label}`} />
       </label>
 
       <div className={"mt-2"}>

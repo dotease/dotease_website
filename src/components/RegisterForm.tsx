@@ -6,6 +6,8 @@ import Input from "dotenv/components/formInputs/Input";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import GitHubConnectButton from "dotenv/components/GitHubConnextButton";
+import frMessages from "dotenv/translations/fr.json";
+import { flattenKeys } from "dotenv/translations/translator";
 
 export const registerSchema = z
   .object({
@@ -32,6 +34,8 @@ export default function RegisterForm() {
   const handleSubmit = methods.handleSubmit;
   const addUser = api.auth.registerUser.useMutation();
 
+  console.log(flattenKeys(frMessages));
+
   function submit(data: RegisterFormData) {
     addUser.mutate(data, {
       onSuccess() {
@@ -53,15 +57,15 @@ export default function RegisterForm() {
       {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
       <form onSubmit={handleSubmit(submit)} className="mt-8 grid grid-cols-6 gap-6">
         <div className="col-span-6 sm:col-span-3">
-          <Input label={"Last Name"} name={"name"} type={"text"} />
+          <Input label={"last_name"} name={"name"} type={"text"} />
         </div>
 
         <div className="col-span-6 sm:col-span-3">
-          <Input label={"First Name"} name={"surname"} type={"text"} />
+          <Input label={"first_name"} name={"surname"} type={"text"} />
         </div>
 
         <div className="col-span-6">
-          <Input label={"Email"} name={"email"} type={"email"} />
+          <Input label={"email"} name={"email"} type={"email"} />
         </div>
 
         <div className="col-span-6">
@@ -69,14 +73,14 @@ export default function RegisterForm() {
         </div>
 
         <div className="col-span-6 sm:col-span-3">
-          <Input label={"Password"} name={"password"} type={"password"} />
+          <Input label={"password"} name={"password"} type={"password"} />
         </div>
 
         <div className="col-span-6 sm:col-span-3">
-          <Input label={"Password Confirmation"} name={"rePassword"} type={"password"} />
+          <Input label={"password_confirmation"} name={"rePassword"} type={"password"} />
         </div>
 
-        <div className="mt-4 col-span-6">
+        <div className="col-span-6 mt-4">
           <p className="text-sm text-gray-500">
             By creating an account, you agree to our
             <Link href="/" className="mx-2 text-gray-700 underline">
