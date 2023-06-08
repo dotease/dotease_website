@@ -7,7 +7,7 @@ interface LinkProps {
     hidden?: boolean,
 }
 
-export default function LinkButton({name, bg_color, text_color, hidden}: LinkProps) {
+export default function Button({name, bg_color, text_color, hidden}: LinkProps) {
     return (
         <button
             hidden={hidden}

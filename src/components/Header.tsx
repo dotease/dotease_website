@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, {useState} from "react";
 import {signOut, useSession} from "next-auth/react";
-import LinkButton from "dotenv/components/Buttons/LinkButton";
+import Button from "dotenv/components/Buttons/Button";
 import NavLinkComponent from "dotenv/components/NavLinkComponent";
 import SearchInput from "dotenv/components/formInputs/SearchInput";
 import ScrollingNavComponent from "dotenv/components/formInputs/ScrollingNavComponent";
@@ -26,10 +26,10 @@ export default function Header() {
             return (
                 <div className="flex justify-center gap-20 sm:gap-3">
                     <Link href={"/auth/login"}>
-                        <LinkButton name={"Login"} text_color={"text-white"} bg_color={"bg-teal-600"}/>
+                        <Button name={"Login"} text_color={"text-white"} bg_color={"bg-teal-600"}/>
                     </Link>
                     <Link href={"/auth/register"}>
-                        <LinkButton name={"Register"}  text_color={"text-teal-600"} bg_color={"bg-gray-100"}/>
+                        <Button name={"Register"}  text_color={"text-teal-600"} bg_color={"bg-gray-100"}/>
                     </Link>
                 </div>
             )
@@ -82,7 +82,7 @@ export default function Header() {
     ]
 
     return (
-        <header aria-label="Site Header" className="bg-white">
+        <header aria-label="Site Header" className="bg-white sticky top-0">
             <div className="flex flex-col mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
                     <div className="md:flex md:items-stretch md:gap-12">
@@ -141,10 +141,10 @@ export default function Header() {
                             :
                             <div className="flex flex-col space-y-2 mt-2 border-t pt-4">
                                 <Link href={"/auth/login"}>
-                                    <LinkButton name={"Login"} text_color={"text-white"} bg_color={"bg-teal-600"}/>
+                                    <Button name={"Login"} text_color={"text-white"} bg_color={"bg-teal-600"}/>
                                 </Link>
                                 <Link href={"/auth/register"}>
-                                    <LinkButton name={"Register"}  text_color={"text-teal-600"} bg_color={"bg-gray-100"}/>
+                                    <Button name={"Register"}  text_color={"text-teal-600"} bg_color={"bg-gray-100"}/>
                                 </Link>
                             </div>
                         }
