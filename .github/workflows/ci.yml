@@ -86,8 +86,6 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-          DISCORD_CLIENT_ID: ${{ secrets.DISCORD_CLIENT_ID }}
-          DISCORD_CLIENT_SECRET: ${{ secrets.DISCORD_CLIENT_SECRET }}
           GIT_ID: ${{ secrets.GIT_ID }}
           GIT_SECRET: ${{ secrets.GIT_SECRET }}
 
@@ -127,5 +125,5 @@ jobs:
             "database_url=${{ secrets.DATABASE_URL }}"
             "next_auth_url=${{ secrets.NEXTAUTH_URL }}"
             "next_auth_secret=${{ secrets.NEXTAUTH_SECRET }}"
-            "discord_client_id=${{ secrets.DISCORD_CLIENT_ID }}"
-            "discord_client_secret=${{ secrets.DISCORD_CLIENT_SECRET }}"
+            "git_id=${{ secrets.GIT_ID }}"
+            "git_secret=${{ secrets.GIT_SECRET }}"
