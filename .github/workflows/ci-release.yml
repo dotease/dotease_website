@@ -1,4 +1,4 @@
-name: Continuous Integration Test
+name: Continuous Integration Release
 on:
   release:
 
