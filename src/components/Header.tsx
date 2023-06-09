@@ -5,6 +5,7 @@ import Button from "dotenv/components/Buttons/Button";
 import NavLinkComponent from "dotenv/components/NavLinkComponent";
 import SearchInput from "dotenv/components/formInputs/SearchInput";
 import ScrollingNavComponent from "dotenv/components/formInputs/ScrollingNavComponent";
+import {GiHamburgerMenu} from "react-icons/gi";
 
 export default function Header() {
     const [isWrappedAbout, setIsWrappedAbout] = useState<boolean>(true);
@@ -108,20 +109,7 @@ export default function Header() {
                                 onClick={toggleWrapAbout}
                                 className="rounded bg-gray-100 p-2 text-gray-600 hover:text-gray-600/75"
                             >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className={`h-5 w-5 transition-transform ease-in-out ${isWrappedAbout ? "" : "rotate-90"}`}
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                </svg>
+                                <GiHamburgerMenu className={`transition-transform ease-in-out ${isWrappedAbout ? "" : "rotate-90"}`} />
                             </button>
                         </div>
                     </div>
