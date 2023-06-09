@@ -69,7 +69,7 @@ export default function RegisterForm() {
         </div>
 
         <div className="col-span-6">
-          <Input label={"Username"} name={"username"} type={"text"} />
+          <Input label={"username"} name={"username"} type={"text"} />
         </div>
 
         <div className="col-span-6 sm:col-span-3">
