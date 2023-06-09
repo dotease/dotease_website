@@ -93,9 +93,11 @@ export default function Header() {
           </div>
 
           <div className="flex items-center gap-5">
-            <div className="hidden md:flex">
-              <Profile />
-            </div>
+            {data?.user && (
+              <div className="hidden md:flex">
+                <Profile />
+              </div>
+            )}
             <div className="hidden md:flex">{handleLogin()}</div>
 
             <div className="block md:hidden">
