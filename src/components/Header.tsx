@@ -26,10 +26,10 @@ export default function Header() {
             return (
                 <div className="flex justify-center gap-20 sm:gap-3">
                     <Link href={"/auth/login"}>
-                        <Button name={"Login"} text_color={"text-white"} bg_color={"bg-teal-600"}/>
+                        <Button name={"Login"} text_color={"text-white"} bg_color={"bg-primary-600"}/>
                     </Link>
                     <Link href={"/auth/register"}>
-                        <Button name={"Register"}  text_color={"text-teal-600"} bg_color={"bg-gray-100"}/>
+                        <Button name={"Register"}  text_color={"text-primary-600"} bg_color={"bg-gray-100"}/>
                     </Link>
                 </div>
             )
@@ -38,7 +38,7 @@ export default function Header() {
             return (
                 <div className="sm:flex sm:gap-4">
                     <button
-                        className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
+                        className="rounded-md bg-primary-600 px-5 py-2.5 text-sm font-medium text-white shadow"
                         onClick={logOut}
                     >
                         Logout
@@ -86,7 +86,7 @@ export default function Header() {
             <div className="flex flex-col mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
                     <div className="md:flex md:items-stretch md:gap-12">
-                        <Link className="block text-teal-600 text-3xl" href="/">
+                        <Link className="block text-primary-600 text-3xl" href="/">
                             <p>.ease</p>
                         </Link>
                     </div>
@@ -141,10 +141,10 @@ export default function Header() {
                             :
                             <div className="flex flex-col space-y-2 mt-2 border-t pt-4">
                                 <Link href={"/auth/login"}>
-                                    <Button name={"Login"} text_color={"text-white"} bg_color={"bg-teal-600"}/>
+                                    <Button name={"Login"} text_color={"text-white"} bg_color={"bg-primaryf-600"}/>
                                 </Link>
                                 <Link href={"/auth/register"}>
-                                    <Button name={"Register"}  text_color={"text-teal-600"} bg_color={"bg-gray-100"}/>
+                                    <Button name={"Register"}  text_color={"text-primary-600"} bg_color={"bg-gray-100"}/>
                                 </Link>
                             </div>
                         }
