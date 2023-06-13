@@ -1,10 +1,59 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { useSession } from "next-auth/react";
 import Header from "dotenv/components/Header";
 
+import Link from "next/link";
+import CopyToClipboardButton from "dotenv/components/Buttons/CopyToClipboardButton";
+import InfoCard, { type InfoCardProps } from "dotenv/components/InfoCard";
+import { GiDiploma } from "react-icons/gi";
+import { AiOutlineControl } from "react-icons/ai";
+import { CiSettings } from "react-icons/ci";
+import { BsBook } from "react-icons/bs";
+import { CgPerformance } from "react-icons/cg";
+import { FaQuestion } from "react-icons/fa";
+import CodeCompare from "dotenv/components/CodeCompare";
+import { useState } from "react";
+import Tabs from "dotenv/components/Tabs";
+
 const Home: NextPage = () => {
-  const { data } = useSession();
+  const infos: InfoCardProps[] = [
+    {
+      title: "RGAA Certification",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat dolores iure fugit totam iste obcaecati. Consequatur ipsa quod ipsum sequi culpa delectus, cumque id tenetur quibusdam, quos fuga minima.",
+      icon: <GiDiploma />,
+    },
+    {
+      title: "Accessibility Control",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat dolores iure fugit totam iste obcaecati. Consequatur ipsa quod ipsum sequi culpa delectus, cumque id tenetur quibusdam, quos fuga minima.",
+      icon: <AiOutlineControl />,
+    },
+    {
+      title: "SEO Control",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat dolores iure fugit totam iste obcaecati. Consequatur ipsa quod ipsum sequi culpa delectus, cumque id tenetur quibusdam, quos fuga minima.",
+      icon: <CiSettings />,
+    },
+    {
+      title: "Learn about good practices",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat dolores iure fugit totam iste obcaecati. Consequatur ipsa quod ipsum sequi culpa delectus, cumque id tenetur quibusdam, quos fuga minima.",
+      icon: <BsBook />,
+    },
+    {
+      title: "Better performance for your website",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat dolores iure fugit totam iste obcaecati. Consequatur ipsa quod ipsum sequi culpa delectus, cumque id tenetur quibusdam, quos fuga minima.",
+      icon: <CgPerformance />,
+    },
+    {
+      title: "No idea for the last one",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat dolores iure fugit totam iste obcaecati. Consequatur ipsa quod ipsum sequi culpa delectus, cumque id tenetur quibusdam, quos fuga minima.",
+      icon: <FaQuestion />,
+    },
+  ];
 
   return (
     <>
@@ -14,15 +63,71 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="flex min-h-screen flex-col items-center justify-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to <b>.ease</b>
-          {data && (
-            <p>
-              {data.user.surname} {data.user.name}{" "}
-            </p>
-          )}
-        </h1>
+      <main className="flex flex-col h-[300vh] w-screen items-center justify-center">
+        <article className="w-full h-[80%]">
+          <section className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
+            <div className="mx-auto w-full text-center">
+              <h1 className="text-3xl font-extrabold sm:text-5xl">
+                The best tool for accessibility
+                <strong className="font-extrabold pl-1 text-primary-600 sm:block">on the web.</strong>
+              </h1>
+
+              <p className="mt-4 text-xs sm:text-xl/relaxed py-10">
+                <strong>.ease</strong> is a solution for people who want to make their website more accessible. With interactive modules, a code accessibility control package and
+                the option of RGAA certification, making your website available to as many people as possible <strong>has never been easier</strong>.
+              </p>
+
+              <div className="mt-8 flex flex-wrap justify-center gap-4">
+                <Link href="/">
+                  <button className="block w-full rounded bg-primary-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-primary-700 focus:outline-none focus:ring active:bg-red-500 sm:w-auto">
+                    Get Started
+                  </button>
+                </Link>
+
+                <Link href="/">
+                  <button className="block w-full rounded px-12 py-3 text-sm font-medium text-primary-600 shadow hover:text-primary-700 focus:outline-none focus:ring active:text-red-500 sm:w-auto">
+                    Learn More
+                  </button>
+                </Link>
+              </div>
+
+              <div className={"mt-6"}>
+                <Tabs
+                  tabs={[
+                    { name: "npm", content: <CopyToClipboardButton text={"npm i @dotease/eslint-plugin"} /> },
+                    { name: "yarn", content: <CopyToClipboardButton text={"yarn add @dotease/eslint-plugin"} /> },
+                    { name: "pnpm", content: <CopyToClipboardButton text={"pnpm i @dotease/eslint-plugin"} /> },
+                  ]}
+                />
+              </div>
+            </div>
+          </section>
+        </article>
+        <article className="w-full h-[70%] bg-primary-800 text-white">
+          <section className="px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
+            <div>
+              <h2 className="text-3xl font-bold sm:text-4xl">What makes us special</h2>
+
+              <p className="mt-4 text-gray-300">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat dolores iure fugit totam iste obcaecati. Consequatur ipsa quod ipsum sequi culpa delectus, cumque
+                id tenetur quibusdam, quos fuga minima.
+              </p>
+            </div>
+            <div className="mt-8 grid grid-cols-1 gap-8 md:mt-16 md:grid-cols-2 md:gap-12 lg:grid-cols-3">
+              {infos.map((info, index) => (
+                <InfoCard key={index} title={info.title} description={info.description} icon={info.icon} />
+              ))}
+            </div>
+          </section>
+        </article>
+        <article className={"w-full h-[70%] bg-gradient-to-b from-primary-800 to-secondary-400 text-white"}>
+          <section className={"rounded w-full h-[80%] px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8"}>
+            <h2 className="text-3xl font-bold sm:text-4xl">Improve your HTML code</h2>
+            <article className={"p-4"}>
+              <CodeCompare />
+            </article>
+          </section>
+        </article>
       </main>
     </>
   );
