@@ -5,7 +5,7 @@ import { api } from "dotenv/utils/api";
 import Input from "dotenv/components/formInputs/Input";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import GitHubConnectButton from "dotenv/components/GitHubConnextButton";
+import GitHubConnectButton from "dotenv/components/Buttons/GitHubConnectButton";
 import frMessages from "dotenv/translations/fr.json";
 import { flattenKeys } from "dotenv/translations/translator";
 

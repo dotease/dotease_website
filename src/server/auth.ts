@@ -2,6 +2,7 @@ import { type GetServerSidePropsContext } from "next";
 import { getServerSession, type NextAuthOptions, type DefaultSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import bcrypt from "bcrypt";
 import { prisma } from "dotenv/server/db";
@@ -62,6 +63,10 @@ export const authOptions: NextAuthOptions = {
     GitHubProvider({
       clientId: env.GIT_ID,
       clientSecret: env.GIT_SECRET,
+    }),
+    GoogleProvider({
+      clientId: env.GOOGLE_ID,
+      clientSecret: env.GOOGLE_SECRET
     }),
     CredentialsProvider({
       name: "DotEaseAuth",

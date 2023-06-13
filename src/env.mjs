@@ -20,6 +20,8 @@ const server = z.object({
   ),
   GIT_ID: z.string(),
   GIT_SECRET: z.string(),
+  GOOGLE_ID: z.string(),
+  GOOGLE_SECRET: z.string(),
 });
 
 /**
@@ -43,6 +45,8 @@ const processEnv = {
   NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   GIT_ID: process.env.GIT_ID,
   GIT_SECRET: process.env.GIT_SECRET,
+  GOOGLE_ID: process.env.GOOGLE_ID,
+  GOOGLE_SECRET: process.env.GOOGLE_SECRET,
 };
 
 // Don't touch the part below
