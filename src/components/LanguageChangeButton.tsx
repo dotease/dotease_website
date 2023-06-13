@@ -14,7 +14,7 @@ function LanguageChangeButton() {
   return (
     <>
       <label htmlFor="language" className="block text-sm font-medium text-gray-900">
-        <FormattedMessage id={"forms.labels.inputs.languages"} />
+        <FormattedMessage id={"forms.inputs.labels.languages"} />
       </label>
 
       <select

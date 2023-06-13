@@ -11,6 +11,12 @@
     },
     "register": {
 
+    },
+    "error": {
+      "title": "Error - 404",
+      "oups": "Uh-oh !",
+      "not_found": "We can't find that page.",
+      "back_home": "Go back home"
     }
   },
   "forms": {
@@ -22,7 +28,8 @@
         "password": "Password",
         "password_confirmation": "Password confirmation",
         "username": "Username",
-        "no_account": "No account ?"
+        "no_account": "No account ?",
+        "languages": "Languages"
       }
     },
     "buttons": {
