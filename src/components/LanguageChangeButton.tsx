@@ -8,21 +8,27 @@ const languagesFlags = {
   //de: "🇩🇪",
 };
 
-function LanguageChangeButton() {
+interface LanguageChangeButtonProps {
+  label?: boolean;
+}
+
+function LanguageChangeButton({ label }: LanguageChangeButtonProps) {
   const [currentLanguage, setCurrentLanguage] = useAtom(languageAtom);
 
   return (
     <>
-      <label htmlFor="language" className="block text-sm font-medium text-gray-900">
-        <FormattedMessage id={"forms.labels.inputs.languages"} />
-      </label>
+      {label && (
+        <label htmlFor="language" className="block text-sm font-medium text-gray-900">
+          <FormattedMessage id={"forms.labels.inputs.languages"} />
+        </label>
+      )}
 
       <select
         onChange={e => setCurrentLanguage(e.target.value)}
         value={currentLanguage}
         name="languageSelector"
         id="language"
-        className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+        className="w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
       >
         {Object.entries(languagesFlags).map(([key, value]) => (
           <option key={key} value={key}>
