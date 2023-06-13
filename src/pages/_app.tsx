@@ -1,7 +1,7 @@
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import { Atkinson_Hyperlegible } from 'next/font/google'
+import { Atkinson_Hyperlegible } from "next/font/google";
 import { api } from "dotenv/utils/api";
 
 import "dotenv/styles/globals.css";
@@ -13,7 +13,7 @@ import { flattenKeys } from "dotenv/translations/translator";
 import { useAtom } from "jotai";
 import { languageAtom } from "dotenv/atoms/atoms";
 
-const messages = {
+export const messages = {
   fr: flattenKeys(frMessages),
   en: flattenKeys(enMessages),
   // falc: {
@@ -24,10 +24,10 @@ const messages = {
   // }
 };
 
-const atkinson_Hyperlegible = Atkinson_Hyperlegible({
+export const atkinsonHyperlegible = Atkinson_Hyperlegible({
   weight: ["400", "700"],
-  subsets:['latin']
-})
+  subsets: ["latin"],
+});
 
 const MyApp: AppType<{ session: Session | null }> = ({ Component, pageProps: { session, ...pageProps } }) => {
   const [currentLanguage] = useAtom(languageAtom);
