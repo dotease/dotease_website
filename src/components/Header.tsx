@@ -7,6 +7,7 @@ import SearchInput from "dotenv/components/formInputs/SearchInput";
 import ScrollingNavComponent from "dotenv/components/formInputs/ScrollingNavComponent";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Profile from "dotenv/components/Buttons/Profile";
+import LanguageChangeButton from "dotenv/components/LanguageChangeButton";
 
 export default function Header() {
   const [isWrappedAbout, setIsWrappedAbout] = useState<boolean>(true);
@@ -89,7 +90,12 @@ export default function Header() {
           </div>
 
           <div className="hidden md:block">
-            <NavLinkComponent linkList={linkList} mainLabel={"Site Nav"} />
+            <div className={"flex items-center justify-center"}>
+              <div className={"w-20 mx-4"}>
+                <LanguageChangeButton label={false} />
+              </div>
+              <NavLinkComponent linkList={linkList} mainLabel={"Site Nav"} />
+            </div>
           </div>
 
           <div className="flex items-center gap-5">
@@ -113,6 +119,7 @@ export default function Header() {
         <div className="flex flex-row-reverse h-screen justify-between content-end">
           <div className="w-4/5 bg-white px-4 border-s border-t">
             <SearchInput />
+            <LanguageChangeButton />
             <NavLinkComponent linkList={linkList} mainLabel={"Site Nav"} />
             {!!data ? (
               <ScrollingNavComponent navTitle={"Account"} linkList={linkAccountList} />
