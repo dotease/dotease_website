@@ -52,7 +52,7 @@ export default function Header() {
       name: "About",
     },
     {
-      link: "/",
+      link: "https://github.com/dotease/dotease",
       name: "GitHub",
     },
     {
