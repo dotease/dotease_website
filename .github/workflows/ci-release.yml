@@ -107,9 +107,7 @@ jobs:
         with:
           images: dotease/dotease_website
           tags: |
-            type=semver
-            pattern={{raw}}
-            value={{github.ref_name}}
+            type=semver,pattern={{raw}},value={{github.ref_name}}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
